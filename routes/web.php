@@ -13,6 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/post/{post}', 'PostController@show')->name('post');
+
+//sets authentication for specific pages
+Route::middleware('auth')->group(function(){
+
+    Route::get('/admin', 'AdminsController@index')->name('admin.index');
+    Route::get('/admin/posts/', 'PostController@index')->name('posts.index');
+    Route::post('/admin/posts', 'PostController@store')->name('posts.store');
+    Route::get('/admin/posts/create', 'PostController@create')->name('posts.create');
+
+    Route::delete('/admin/posts/{post}/destroy', 'PostController@destroy')->name('posts.destroy');
+    Route::get('/admin/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
+    Route::patch('/admin/posts/{post}/update', 'PostController@update')->name('posts.update');
+
 });
+
+// Route::get('/admin/posts/{post}/edit', 'PostController@edit')->middleware('can:view,post')->name('posts.edit'); //only authorised users can access edit view
