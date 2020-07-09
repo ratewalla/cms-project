@@ -32,6 +32,12 @@ Route::middleware('auth')->group(function(){
     Route::get('/admin/posts/{post}/edit', 'PostController@edit')->name('posts.edit');
     Route::patch('/admin/posts/{post}/update', 'PostController@update')->name('posts.update');
 
+    Route::get('/admin/users/{user}/profile', 'UserController@showProfile')->name('user.profile.show');
+    Route::put('/admin/users/{user}/update', 'UserController@updateProfile')->name('user.profile.update');
+    Route::get('/admin/users/', 'UserController@index')->name('users.index');
+    Route::delete('/admin/users/{users}/destroy', 'UserController@destroy')->name('user.destroy');
+
 });
 
 // Route::get('/admin/posts/{post}/edit', 'PostController@edit')->middleware('can:view,post')->name('posts.edit'); //only authorised users can access edit view
+

@@ -4,8 +4,9 @@
 @section('content')
 
 
-<h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
-
+@if(auth()->user()->userHasRole('admin'))
+    <h1 class="h3 mb-4 text-gray-800">Admin Page</h1>
+@endif
 
 
 @endsection

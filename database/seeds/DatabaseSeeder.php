@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
         // 'each' function has a callback, can pull a user and save it as an instance ($user) and access its relationship
         // assigns and saves post to user
-        factory(User::class,10)->create()->each(function($user){
+        factory(User::class,90)->create()->each(function($user){
             $user->posts()->save(factory(Post::class)->make());
         });
 

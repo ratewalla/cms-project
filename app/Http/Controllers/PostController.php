@@ -11,8 +11,11 @@ class PostController extends Controller
 
     public function index(){
 
-        // $posts = Post::all();
-        $posts = auth()->user()->posts()->paginate(5); //use posts as a property (no ()) to return a collection
+        //return all posts
+        $posts = Post::all();
+        
+        //return only users posts
+        // $posts = auth()->user()->posts()->paginate(5); //use posts as a property (no ()) to return a collection
 
         return view('admin.posts.index',['posts'=>$posts]);
 
@@ -56,8 +59,6 @@ class PostController extends Controller
         $post->delete();
         Session::flash('message','Post was deleted successfully.'); // saves a message in flash data for one time only
         return back();
-    
-    
     }
 
 
