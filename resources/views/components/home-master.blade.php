@@ -46,7 +46,13 @@
           {{-- Checks to see if user is logged in as admin and displays admin link if they are else displays login --}}
           @if(Auth::check())
           <li class="nav-item">
-          <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
+          <a class="nav-link" href="{{route('admin.index')}}">Control Panel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{route('admin.index')}}">{{auth()->user()->name}}
+              <img src="{{auth()->user()->profile_pic}}" alt="" srcset="" height="25">
+            </a>
+            
           </li>
           @else
           <li class="nav-item">

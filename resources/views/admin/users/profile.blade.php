@@ -66,6 +66,86 @@
     </div>
 </div>
 
+<div>
+<h1>Role(s)</h1>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                    <th>Has Role</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Attach</th>
+                    <th>Detach</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                    <th>Has Role</th>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Slug</th>
+                    <th>Attach</th>
+                    <th>Detach</th>
+                </tr>
+              </tfoot>
+                <tbody>
+                    @foreach($roles as $role)
+                    <tr>
+                        <td>
+                            <input type="checkbox"
+                            @foreach($user->roles as $user_role)
+                                @if($user_role->slug == $role->slug)
+                                    checked disabled
+                                    @else unchecked disabled
+                                @endif
+                            @endforeach
+                            >
+
+                        </td>
+                        <td>{{$role->id}}</td>
+                        <td>{{$role->name}}</td>
+                        <td>{{$role->slug}}</td>
+                        <td>
+                        <form action="{{route('users.role.attach',$user->id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="role" value="{{$role->id}}">
+                                <button class="btn btn-primary" 
+                                @if($user->roles->contains($role))
+                                    disabled
+                                @endif
+                            >Attach</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="{{route('users.role.detach',$user->id)}}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <input type="hidden" name="role" value="{{$role->id}}">
+                                <button class="btn btn-danger" 
+                                @if(!$user->roles->contains($role))
+                                    disabled
+                                @endif
+                            >Detach</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                    
+                </tbody>
+            </table>
+          </div>
+    </div>
+</div>
+
+
+
+</div>
+
 
 @endsection
 

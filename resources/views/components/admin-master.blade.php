@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Blank</title>
+  <title>Control Panel</title>
 
   <!-- Custom fonts for this template-->
 <link href="{{asset('vendor/fontawesome-free/css/all.css')}}" rel="stylesheet" type="text/css">
@@ -36,7 +36,7 @@
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">Control Panel</div>
       </a>
 
       <!-- Divider -->
@@ -58,10 +58,10 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <x-admin-sidebar-posts-links></x-admin-sidebar-postslinks>
+      <x-admin.sidebar.admin-sidebar-posts-links></x-admin.sidebar.admin-sidebar-postslinks>
         
         @if(auth()->user()->userHasRole('admin'))
-        <x-admin-sidebar-users-links></x-admin-users-postslinks>
+        <x-admin.sidebar.admin-sidebar-users-links></x-admin.sidebar.admin-users-postslinks>
         @endif
 
 
@@ -163,7 +163,9 @@
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
-
+            <button type="button" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-home"></span><a href="{{route('home')}}" >Home</a>
+            </button>
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -292,7 +294,7 @@
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
-          <x-admin-top-navbar-user-info></x-admin-top-navbar-user-info>
+          <x-admin.top-navbar.admin-top-navbar-user-info></x-admin.top-navbar.admin-top-navbar-user-info>
 
           </ul>
 

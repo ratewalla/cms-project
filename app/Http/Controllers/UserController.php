@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
 Use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -16,7 +17,10 @@ class UserController extends Controller
 
 
     public function showProfile(User $user){  //inject user class
-        return view('admin.users.profile',['user'=>$user]); //return user
+        return view('admin.users.profile',[
+            'user'=>$user,
+            'roles'=>Role::all()
+            ]); //return user and attached roles
     }
 
     public function updateProfile(User $user){  //inject user class
@@ -36,7 +40,7 @@ class UserController extends Controller
 
         $user->update($inputs);
         
-        return back();
+        return redirect()->route('admin.index');
 
     }
 
@@ -44,8 +48,25 @@ class UserController extends Controller
         $posts = $users->posts();
 
         $users->delete();
-        $posts->delete();
+        $posts->delete(); //deletes all posts created by the user
         Session::flash('deleted_message','User was deleted successfully.'); // saves a message in flash data for one time only
         return back();
     }
+
+    public function attachRole(User $user){
+
+        // dd($user);
+        $user->roles()->attach(request('role'));
+        return back();
+
+    }
+
+    public function detachRole(User $user){
+
+        // dd($user);
+        $user->roles()->detach(request('role'));
+        return back();
+
+    }
+
 }

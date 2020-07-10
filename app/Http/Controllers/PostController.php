@@ -12,10 +12,15 @@ class PostController extends Controller
     public function index(){
 
         //return all posts
-        $posts = Post::all();
+        // $posts = Post::all();
         
-        //return only users posts
-        // $posts = auth()->user()->posts()->paginate(5); //use posts as a property (no ()) to return a collection
+        //if user is admin show all posts, else show only their own posts
+        if(auth()->user()->userHasRole('admin')){
+            $posts = Post::all();
+        } else{
+            $posts = auth()->user()->posts()->paginate(5); //use posts as a property (no ()) to return a collection
+        }
+        
 
         return view('admin.posts.index',['posts'=>$posts]);
 

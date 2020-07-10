@@ -40,7 +40,7 @@
                     <tr>
                     <td>{{$user->id}}</td>
                     <td><img height="50" src="{{$user->profile_pic}}" alt=""></td>
-                    <td>{{$user->username}}</td>
+                    <td><a href="{{route('user.profile.show',$user->id)}}">{{$user->username}}</a></td>
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
 
