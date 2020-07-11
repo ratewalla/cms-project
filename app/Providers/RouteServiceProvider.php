@@ -43,12 +43,11 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
-
         $this->mapWebRoutes();
-
         $this->mapPostsRoutes();
-
+        $this->mapPermissionRoutes();
         $this->mapUsersRoutes();
+        $this->mapRolesRoutes();
     }
 
     /**
@@ -94,5 +93,21 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web/users.php'));
+    }
+
+    protected function mapPermissionRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web','auth','role:admin'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/permissions.php'));
+    }
+
+    protected function mapRolesRoutes()
+    {
+        Route::prefix('admin')
+            ->middleware(['web','auth','role:admin'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/roles.php'));
     }
 }

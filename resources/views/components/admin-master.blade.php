@@ -58,10 +58,11 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <x-admin.sidebar.admin-sidebar-posts-links></x-admin.sidebar.admin-sidebar-postslinks>
-        
+      <x-admin.sidebar.admin-sidebar-posts-links></x-admin.sidebar.admin-sidebar-posts-links>
+  
         @if(auth()->user()->userHasRole('admin'))
-        <x-admin.sidebar.admin-sidebar-users-links></x-admin.sidebar.admin-users-postslinks>
+        <x-admin.sidebar.admin-sidebar-users-links></x-admin.sidebar.admin-users-posts-links>
+        <x-admin.sidebar.authorisation-links></x-admin.sidebar.authorisation-links>
         @endif
 
 
